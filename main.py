@@ -9,7 +9,11 @@ class MainWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
+        self.setWindowTitle("Jira Watch")
 
+        # Inicia a tela principal
+        self.ui = UI_MainWindow()
+        self.ui.setup_ui(self)
         self.show()
 
 
