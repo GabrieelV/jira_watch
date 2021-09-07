@@ -14,6 +14,7 @@ class MainWindow(QMainWindow):
         # Inicia a tela principal
         self.ui = UI_MainWindow()
         self.ui.setup_ui(self)
+        
         self.show()
 
 

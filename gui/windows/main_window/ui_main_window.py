@@ -9,6 +9,8 @@ class UI_MainWindow(object):
         # Parametros iniciais
         parent.resize(500, 130)
         parent.setMinimumSize(500, 130)
+        # parent.setWindowFlags(Qt.FramelessWindowHint)
+
         # parent.setMaximumSize(500, 130)
 
         self.central_frame = QFrame()
@@ -19,6 +21,7 @@ class UI_MainWindow(object):
         self.main_layout.setSpacing(0)
         self.top_menu()
         self.content()
+        # self.content()
         self.bottom_bar()
 
         # Set central widget
@@ -44,34 +47,97 @@ class UI_MainWindow(object):
         self.cb_projetos.addItem("Teste 2")
         self.cb_projetos.addItem("Teste 3 aaaaa123")
 
+        self.bt_add_task_space = QPushButton('+')
+        self.bt_add_task_space.setMinimumWidth(35)
+        self.bt_add_task_space.setMaximumWidth(35)
+
         # Add to layout
         self.top_bar_layout.addWidget(self.lb_filtro)
         self.top_bar_layout.addWidget(self.cb_projetos)
         self.top_bar_layout.addItem(self.top_spacer)
+        self.top_bar_layout.addWidget(self.bt_add_task_space)
 
         # Adicionar widgets
         self.main_layout.addWidget(self.top_bar)
         
     def content(self):
         # Content
-        self.content = QFrame()
-        self.content.setStyleSheet("background-color: #282a36")
+        content = QFrame()
+        content_layout = QVBoxLayout(content)
+        content_layout.setContentsMargins(0, 0, 0, 0)
+        content_layout.setSpacing(0)
 
-        # Content layout
-        self.content_layout = QVBoxLayout(self.content)
-        self.content_layout.setContentsMargins(20, 0, 20, 0)
-        self.content_layout.setSpacing(0)
+        # Spacer
+        spacer_1 = QSpacerItem(5, 5, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.cb_tasks = QComboBox()
-        self.cb_tasks.addItem('CER-196 - TESTE 1')
-        self.cb_tasks.addItem('CER-198 - TESTE 2')
-        self.cb_tasks.addItem('CER-203 - TESTE 3')
-        self.cb_tasks.setFixedWidth(300)
+        # Content top
+        content_top = QFrame()
+        content_top.setStyleSheet("background-color: #282a36; color: #ffffff")
 
-        self.content_layout.addWidget(self.cb_tasks)
+        # Content top layout
+        content_layout_top = QHBoxLayout(content_top)
+        content_layout_top.setContentsMargins(20, 5, 20, 0)
+        content_layout_top.setSpacing(5)
+        
+        # Content bottom
+        content_bottom = QFrame()
+        content_bottom.setStyleSheet("background-color: #000000; color: #ffffff")
 
-        # Adicionar widgets
-        self.main_layout.addWidget(self.content)
+        # Content bottom layout
+        content_layout_bottom = QHBoxLayout(content_bottom)
+        content_layout_bottom.setContentsMargins(20, 0, 20, 5)
+        content_layout_bottom.setSpacing(0)
+
+        # Content top components
+        cb_tasks = QComboBox()
+        cb_tasks.addItem('CER-196 - TESTE 1')
+        cb_tasks.addItem('CER-198 - TESTE 2')
+        cb_tasks.addItem('CER-203 - TESTE 3')
+        cb_tasks.setFixedWidth(150)
+
+        bt_play = QPushButton("P")
+        bt_play.setMinimumWidth(35)
+        bt_play.setMaximumWidth(35)
+
+        txt_time = QLineEdit('0m')
+        txt_time.setReadOnly(True)
+        txt_time.setAlignment(Qt.AlignRight)
+
+        bt_send_work = QPushButton("S")
+        bt_send_work.setMinimumWidth(35)
+        bt_send_work.setMaximumWidth(35)
+
+        bt_reset_work_time = QPushButton("R")
+        bt_reset_work_time.setMinimumWidth(35)
+        bt_reset_work_time.setMaximumWidth(35)
+
+        bt_delete_content_work = QPushButton("D")
+        bt_delete_content_work.setMinimumWidth(35)
+        bt_delete_content_work.setMaximumWidth(35)
+
+
+        # Add to content top layout
+        content_layout_top.addWidget(cb_tasks)
+        content_layout_top.addItem(spacer_1)
+        content_layout_top.addWidget(bt_play)
+        content_layout_top.addWidget(txt_time)
+        content_layout_top.addWidget(bt_send_work)
+        content_layout_top.addItem(spacer_1)
+        content_layout_top.addWidget(bt_reset_work_time)
+        content_layout_top.addWidget(bt_delete_content_work)
+
+
+        # Content bottom components
+        lb_task_tittle = QLabel("Teste titulo")
+
+        # Add to content bottom layout
+        content_layout_bottom.addWidget(lb_task_tittle)
+        content_layout_bottom.addItem(spacer_1)
+
+        # Add widgets to content layout
+        content_layout.addWidget(content_top)
+        content_layout.addWidget(content_bottom)
+        self.main_layout.addWidget(content)
 
     def bottom_bar(self):
 
